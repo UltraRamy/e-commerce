@@ -20,3 +20,19 @@ Tugas 8
    - Saya menggunakan AlertDialog untuk menampilkan data pada sebuah pop-up setelah Save ditekan
    - Saya membuat left_drawer.dart untuk membuat drawer dan menggunakan push replacement untuk mengarahkan pengguna ke halaman yang sesuai
    - Saya membaca slide materi 09 dan melakukan pencarian di internet untuk mengerjakan README.md
+
+Tugas 9
+1. Model digunakan untuk menjaga struktur data dan penyesuaian tipe data. Jika kita tidak membuat data terlebih dahulu, tidak eror namun harus diperiksa dan disesuaikan secara manual
+2. Membuat request HTTP
+3. Fungsinya adalah menyimpan informasi mengenai pengguna dan perlu dibagikan agar informasi tersebut tersalurkan
+4. Input > Request ke Server Django > Django Memproses Data dan Mengembalikan JSON Response > Flutter Menerima dan Parsing > Ditampilkan
+5. Input > Request ke Django > Django veirifikasi data > Django Mengembalikan Response > Flutter menampilkan
+6. Cara Menyelesaikan Checklists:
+   - Saya membuat register.dart pada Flutter dan register() pada Django
+   - Saya membuat login.dart pada Flutter dan login() pada Django
+   - Saya membuat fungsi/page/endpooint yang diperlukan, membuat request ke fungsi/page/endpoint tersebut, memproses dan menampilkan hasil
+   - Saya menyesuaikan field dan attribute sesuai yang diperlukan
+   - Saya membuat list.dart
+   - Saya menambuat onTap menuju page details masing - masing dan menampilkan atribut yang diinginkan di sana
+   - Sudah di filter pada JSON
+
