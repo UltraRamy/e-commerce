@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce/screens/moodentry_form.dart';
-import 'package:e_commerce/widgets/mood_card.dart';
-// Impor drawer widget
-import 'package:e_commerce/widgets/left_drawer.dart';
+import 'package:mental_health_tracker/widgets/left_drawer.dart';
+import 'package:mental_health_tracker/screens/moodentry_form.dart';
+import 'package:mental_health_tracker/widgets/mood_card.dart';
+
 
 class MyHomePage extends StatelessWidget {
     final String npm = '2306210393'; // NPM
     final String name = 'Ramy Ardya Ramadhan'; // Nama
     final String className = 'PBP D'; // Kelas
     final List<ItemHomepage> items = [
-         ItemHomepage("Lihat Daftar Produk", Icons.mood),
-         ItemHomepage("Tambah Produk", Icons.add),
+         ItemHomepage("Lihat Mood", Icons.mood),
+         ItemHomepage("Tambah Mood", Icons.add),
          ItemHomepage("Logout", Icons.logout),
      ];
     MyHomePage({super.key});
@@ -20,10 +20,9 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       // AppBar adalah bagian atas halaman yang menampilkan judul.
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
         // Judul aplikasi "Mental Health Tracker" dengan teks putih dan tebal.
         title: const Text(
-          'E-Commerce',
+          'Mental Health Tracker',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -31,6 +30,7 @@ class MyHomePage extends StatelessWidget {
         ),
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: const LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
@@ -63,7 +63,7 @@ class MyHomePage extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(top: 16.0),
                     child: Text(
-                      'Welcome to E-Commerce',
+                      'Welcome to Mental Health Tracker',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.0,

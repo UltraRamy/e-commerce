@@ -1,15 +1,17 @@
-
-import 'package:e_commerce/screens/menu.dart';
+import 'package:mental_health_tracker/screens/list_moodentry.dart';
+import 'package:mental_health_tracker/screens/login.dart';
+import 'package:mental_health_tracker/screens/moodentry_form.dart';
+import 'package:mental_health_tracker/screens/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:e_commerce/screens/moodentry_form.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ItemHomepage {
-     final String name;
-     final IconData icon;
+  final String name;
+  final IconData icon;
 
-     ItemHomepage(this.name, this.icon);
- }
-
+  ItemHomepage(this.name, this.icon);
+}
 class ItemCard extends StatelessWidget {
   // Menampilkan kartu dengan ikon dan nama.
 
@@ -19,39 +21,61 @@ class ItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- Color cardColor = Theme.of(context).colorScheme.secondary;
-    
-    // Change color if the item is "Tambah Produk"
-    if (item.name == "Tambah Produk") {
-      cardColor = Colors.green; // Custom color for "Tambah Produk" button
-    }
-    if (item.name == "Lihat Daftar Produk") {
-      cardColor = Colors.red; // Custom color for "Tambah Produk" button
-    }
+    final request = context.watch<CookieRequest>();
     return Material(
       // Menentukan warna latar belakang dari tema aplikasi.
-      color: cardColor,
+      color: Theme.of(context).colorScheme.secondary,
       // Membuat sudut kartu melengkung.
       borderRadius: BorderRadius.circular(12),
       
       child: InkWell(
         // Aksi ketika kartu ditekan.
-        onTap: () {
-  // Memunculkan SnackBar ketika diklik
-  ScaffoldMessenger.of(context)
-    ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(
-        content: Text("Kamu telah menekan tombol ${item.name}!")));
+        onTap: () async {
+          // Memunculkan SnackBar ketika diklik
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!")));
 
-if (item.name == "Tambah Produk") {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => MoodEntryFormPage(),
-    ),
-  );
-}
-},
+          // Navigate ke route yang sesuai (tergantung jenis tombol)
+          if (item.name == "Tambah Mood") {
+            Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MoodEntryFormPage(),
+            ));
+          }
+          else if (item.name == "Lihat Mood") {
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (context) => const MoodEntryPage()
+                ),
+            );
+          }
+          else if (item.name == "Logout") {
+            final response = await request.logout(
+                "http://127.0.0.1:8000/auth/logout/");
+            String message = response["message"];
+            if (context.mounted) {
+                if (response['status']) {
+                    String uname = response["username"];
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("$message Sampai jumpa, $uname."),
+                    ));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                    );
+                } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(message),
+                        ),
+                    );
+                }
+            }
+          }
+        },
         // Container untuk menyimpan Icon dan Text
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -80,3 +104,4 @@ if (item.name == "Tambah Produk") {
   }
   
 }
+
